@@ -1,0 +1,68 @@
+<html>
+
+<!-- Head -->
+<head>
+    <title>ShopMaster</title>
+    
+    <!-- jQuery -->
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+
+    <!-- Angular.js -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.2.15/angular.min.js"></script>
+    <script src="http://angular-ui.github.com/bootstrap/ui-bootstrap-tpls-0.2.0.js"></script>
+      
+    <script src="./js/app.js"></script>
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="./css/shopmaster.css">
+
+    <!-- Fonts -->
+    <link href="http://fonts.googleapis.com/css?family=Dancing+Script" rel="stylesheet" type="text/css">
+    <link href="http://fonts.googleapis.com/css?family=Bitter:400,400italic" rel="stylesheet" type="text/css">
+</head>
+
+<body ng-app="shopMaster">
+    <div class="container">
+        <div id="sm-title-slide">
+            <span id="sm-title">ShopMaster</span>
+            <br/>
+            <span id="sm-slogan">Unleash your inner mom!</span>
+        </div>
+          
+        <!-- Login form -->
+        <div id="sm-login-slide">
+            
+            <!-- novalidate to suppress HTML5 validation; use Angular's sexy validation -->
+            <form role="form" name="landingForm" novalidate>
+                
+                <!-- emailTextView form group -->
+                <div class="form-group" ng-class="{'has-error': landingForm.emailTextView.$invalid}">
+                    
+                    <!-- Email input -->
+                    <input name="emailTextView"
+                           type="email"
+                           class="form-control"
+                           id="sm-email-text-entry" 
+                           placeholder="Type your email address"
+                           ng-model="data.email"
+                           required>
+                    
+                </div>
+                
+                <button type="button" 
+                        class="btn btn-info" 
+                        id="sm-lets-do-this-btn" 
+                        ng-disabled="landingForm.emailTextView.$invalid">
+                        Let's Do This
+                </button>
+                
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,44 @@
+body {
+  font-family: "Bitter";
+  font-size: 16pt;
+  background-color: #1671B8;
+  color: #FFFFFF;
+}
+
+.has-error input {
+    color: #B53E3E;
+}
+
+/* IDs */
+
+#sm-title-slide {
+  margin-top: 200px;
+  text-align: center;
+}
+#sm-title {
+  font-family: "Dancing Script";
+  font-size: 96pt;
+  line-height: 0.8em;
+}
+#sm-slogan {
+  font-size: 20pt;
+  margin-left: 200px;
+}
+
+
+#sm-login-slide {
+  width: 35%;
+  margin-top: 70px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+#sm-lets-do-this-btn, #sm-email-text-entry {
+  font-size: 14pt;
+}
+#valid-email-error-msg {
+    font-family: "Bitter";
+  font-size: 12pt;
+  background-color: #1671B8;
+  color: #FFFFFF;
+}

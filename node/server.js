@@ -1,7 +1,14 @@
-var http = require("http");
-
-http.createServer(function(request, response) {
-  response.writeHead(200, {"Content-Type": "text/plain"});
-  response.write("Hello World");
-  response.end();
-}).listen(process.env.PORT || 8888);
+var express = require("express");
+var lists = require("./lists");
+ 
+var app = express();
+app.use(express.json()); 
+app.use(express.urlencoded());
+ 
+app.get("/emailVerify/:email", lists.emailVerify);   // GET
+app.post("/listAdd", lists.listAdd);                // POST
+app.get("/listDrop/:email", lists.listDrop);         // GET
+app.get("/listGet/:email", lists.listGet);           // GET
+ 
+app.listen(8888);
+console.log("Server started on port 8888...");

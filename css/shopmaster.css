@@ -69,5 +69,31 @@ body {
     margin-top: 150px;
 }
 #sm-item-text-entry {
-  font-size: 14pt;
+    font-size: 14pt;
 }
+#sm-category-text-entry {
+    font-size: 14pt;
+    width: 100%;
+}
+.tt-dropdown-menu {
+    color: #292929;
+    width: 445px;
+    padding: 8px 0;
+    background-color: #FFFFFF;
+    border: 1px solid #ccc;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 8px;
+    -moz-border-radius: 8px;
+    border-radius: 8px;
+    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
+    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+}
+.tt-suggestion {
+    padding-left: 15px;
+}
+.tt-cursor {
+    color: #FFFFFF;
+    background-color: #0058A3;
+}
+

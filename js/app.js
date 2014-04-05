@@ -47,8 +47,7 @@ shopMaster.controller("LandingCtrl", function($scope, $location, $http) {
         // DEBUG
         $location.path("/create");
         
-        /*
-        var emailAddress = $scope.emailAddress;
+        /*var emailAddress = $scope.emailAddress;
         
         // Fire AJAX request
         $http({method: "GET", 
@@ -57,6 +56,8 @@ shopMaster.controller("LandingCtrl", function($scope, $location, $http) {
             success(function(data, status, headers, config) {
                 // Handle success
                 $("#sm-loading-landing").css({"visibility": "invisible"});
+                
+                // TODO: Check result to see if it was true or false
                 
                 // Route to create
                 $location.path("templates/create.html");
@@ -69,8 +70,7 @@ shopMaster.controller("LandingCtrl", function($scope, $location, $http) {
             });
         
         // Show loading animation
-        $("#sm-loading-landing").css({"visibility": "visible"});
-        */
+        $("#sm-loading-landing").css({"visibility": "visible"});*/
     };
 
 });

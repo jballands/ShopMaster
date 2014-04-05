@@ -1,3 +1,9 @@
+<!-- typeahead.js -->
+<script src="./js/typeahead.jquery.js"></script>
+<script src="./js/bloodhound.min.js"></script>
+<script src="./js/combo.js"></script>
+
+<!-- Content -->
 <div id="sm-navi">
     
     <div id="sm-tools">
@@ -22,13 +28,30 @@
 
     <div id="sm-create-entry">
         <form role="form" name="createForm" novalidate>
-            <input name="itemTextView"
-                type="text"
-                class="form-control"
-                id="sm-item-text-entry" 
-                placeholder="Type a grocery item...">
+            
+            <div class="col-md-5">
+                <input name="itemTextView"
+                    type="text"
+                    class="form-control"
+                    id="sm-item-text-entry" 
+                    placeholder="Type a grocery item...">
+            </div>
+            
+            <div class="col-md-5">
+                <input name="categoryTextView"
+                    type="text"
+                    class="form-control"
+                    id="sm-category-text-entry" 
+                    data-provide="typeahead"
+                    placeholder="Categorize this item..."
+                    style="width:445px">
+            </div>
+            <div class="col-md-2">
+                <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> Add</button>
+            </div>
             
         </form>
+        
     </div>
     
 </div>

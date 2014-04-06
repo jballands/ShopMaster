@@ -63,6 +63,25 @@ shopMaster.directive("sortable", function($compile) {
     };
 });    
 
+shopMaster.directive("popover", function ($templateCache) {
+
+    return {
+        restrict: "A",
+        
+        link: function (scope, element, attrs) {
+            
+            $(element).popover({
+                trigger: "click",
+                html: true,
+                content: $templateCache.get("tools.html"),
+                placement: "bottom",
+                container: "body"
+            });
+        }
+    };
+    
+});
+
 /* 
  * -----------
  * Controllers
@@ -339,6 +358,8 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http) {
         
         $scope.tbaItem = undefined;
         $scope.tbaCategory = undefined;
+        
+        console.log($scope.searchCategory);
     };
     
     $scope.removeItem = function(index) {

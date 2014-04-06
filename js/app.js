@@ -1,7 +1,8 @@
 /*
- *  Defines the ShopMaster app using Angular.js
- *
- *  Coded with <3 by Jonathan Ballands :)
+ *  app.js (Angular.js front-end processing)
+ *  By Jonathan Ballands, Sloane Neidig, and Brad Retterer
+ *  
+ *  (C)2014 All Rights Reserved.
  */
 
 var shopMaster = angular.module("shopMaster", ["ngRoute", "ui.bootstrap"]);
@@ -24,13 +25,43 @@ shopMaster.config(function($routeProvider) {
     });
 });
 
-
 /*
  *  ----------
  *  Directives
  *  ----------
  */
 
+// Here, I'm interacting with the jQuery UI draggable widget API
+// http://api.jqueryui.com/draggable/
+shopMaster.directive("dir-sortable", function($compile) {
+    return {
+        restrict: "A",
+    
+        link:function(scope, element, attrs){
+            
+            element.sortable({
+
+                deactivate: function(event, ui) {
+                    console.log("Deactivated");
+                    
+                    var from = angular.element(ui.item).scope().$index;
+                    var to = el.children().index(ui.item);
+        
+                    if(to >= 0){
+                        scope.$apply(function() {
+                            if(from >= 0){
+                                scope.$emit("listReorderedEvent", {from: from, to: to});
+                            }
+                        });
+                    }
+                }
+                
+            });
+            
+            element.disableSelection();
+        }
+    };
+});    
 
 /* 
  * -----------
@@ -308,9 +339,12 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http) {
         
         $scope.tbaItem = undefined;
         $scope.tbaCategory = undefined;
-        
-        console.log($scope.items);
-        
     };
+    
+    // List for the listReorderEvent emitted by the "dir-sortable" directive
+    $scope.$on("listReorderedEvent", function(event, value) {
+        console.log("Reordering...");
+        $scope.items.splice(value.to, 0, $scope.items.splice(value.from, 1)[0]);
+    });
 
 });

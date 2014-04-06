@@ -1,11 +1,5 @@
 <!-- jQuery UI -->
 <script src="./js/jquery-ui-1.10.4.custom.min.js"></script>
-<script>
-    $(function() {
-        $("#sortable").sortable();
-        $("#sortable").disableSelection();
-    });
-</script>
 
 <!-- Content -->
 <div id="sm-navi">
@@ -74,7 +68,7 @@
     </div>
     
     <div id="sm-list" class="col-md-12">
-        <ul id="sortable">
+        <ul dir-sortable>
             <li ng-repeat="item in items">
                 <div class="item-container">
                     

@@ -50,7 +50,7 @@
                     required>
             </div>
             
-            <div class="col-md-2" style="text-align:left;">
+            <div class="col-md-1" style="margin-left:20px;">
                 <button type="button" 
                         class="btn btn-info"
                         ng-disabled="createForm.$invalid"
@@ -68,7 +68,14 @@
     </div>
     
     <div id="sm-list" class="col-md-12">
-        <ul dir-sortable>
+        
+        <div id="sm-no-list" ng-show="items.length == 0">
+            <span style="font-size:48pt;">No items :(</span>
+            <br/>
+            Maybe you should try adding some items to your list?
+        </div>
+        
+        <ul sortable>
             <li ng-repeat="item in items">
                 <div class="item-container">
                     
@@ -78,7 +85,8 @@
                     
                     <button type="button" 
                         class="btn btn-danger"
-                        style="float:right;margin-top:-1.5em;">
+                        style="float:right;margin-top:-1.5em;"
+                        ng-click="removeItem($index)">
                         <span class="glyphicon glyphicon-remove"></span> Remove
                     </button>
                     

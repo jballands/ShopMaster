@@ -31,21 +31,21 @@ shopMaster.config(function($routeProvider) {
  *  ----------
  */
 
-// Here, I'm interacting with the jQuery UI draggable widget API
-// http://api.jqueryui.com/draggable/
-shopMaster.directive("dir-sortable", function($compile) {
+// I'm interacting with the jQuery UI sortable widget API in this
+// directive: http://api.jqueryui.com/sortable/
+shopMaster.directive("sortable", function($compile) {
+   
     return {
         restrict: "A",
     
-        link:function(scope, element, attrs){
+        link: function(scope, element, attrs){
             
             element.sortable({
-
+                
                 deactivate: function(event, ui) {
-                    console.log("Deactivated");
                     
                     var from = angular.element(ui.item).scope().$index;
-                    var to = el.children().index(ui.item);
+                    var to = element.children().index(ui.item);
         
                     if(to >= 0){
                         scope.$apply(function() {
@@ -335,15 +335,20 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http) {
         var item = $scope.tbaItem;
         var cat = $scope.tbaCategory;
         
-        $scope.items.push({name: item, category: cat});
+        $scope.items.unshift({name: item, category: cat});
         
         $scope.tbaItem = undefined;
         $scope.tbaCategory = undefined;
     };
     
+    $scope.removeItem = function(index) {
+        
+        $scope.items.splice(index, 1);
+        
+    }
+    
     // List for the listReorderEvent emitted by the "dir-sortable" directive
     $scope.$on("listReorderedEvent", function(event, value) {
-        console.log("Reordering...");
         $scope.items.splice(value.to, 0, $scope.items.splice(value.from, 1)[0]);
     });
 

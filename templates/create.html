@@ -1,7 +1,11 @@
-<!-- typeahead.js -->
-<script src="./js/typeahead.jquery.js"></script>
-<script src="./js/bloodhound.min.js"></script>
-<script src="./js/combo.js"></script>
+<!-- jQuery UI -->
+<script src="./js/jquery-ui-1.10.4.custom.min.js"></script>
+<script>
+    $(function() {
+        $("#sortable").sortable();
+        $("#sortable").disableSelection();
+    });
+</script>
 
 <!-- Content -->
 <div id="sm-navi">
@@ -27,14 +31,17 @@
 <div class="container">
 
     <div id="sm-create-entry">
+        
         <form role="form" name="createForm" novalidate>
             
             <div class="col-md-5">
                 <input name="itemTextView"
                     type="text"
                     class="form-control"
+                    ng-model="tbaItem"
                     id="sm-item-text-entry" 
-                    placeholder="Type a grocery item...">
+                    placeholder="Type a grocery item..."
+                    required>
             </div>
             
             <div class="col-md-5">
@@ -42,16 +49,48 @@
                     type="text"
                     class="form-control"
                     id="sm-category-text-entry" 
-                    data-provide="typeahead"
+                    ng-model="tbaCategory"
                     placeholder="Categorize this item..."
-                    style="width:445px">
+                    style="width:445px"
+                    typeahead="category for category in categories | filter:$viewValue | limitTo:8"
+                    required>
             </div>
-            <div class="col-md-2">
-                <button type="button" class="btn btn-info"><span class="glyphicon glyphicon-plus"></span> Add</button>
+            
+            <div class="col-md-2" style="text-align:left;">
+                <button type="button" 
+                        class="btn btn-info"
+                        ng-disabled="createForm.$invalid"
+                        ng-click="addItem()">
+                    <span class="glyphicon glyphicon-plus"></span> Add
+                </button>
             </div>
             
         </form>
         
+    </div>
+    
+    <div class="col-md-12" style="padding-top:25px;">
+        <h1 style="text-align:center;">Your List:</h1>
+    </div>
+    
+    <div id="sm-list" class="col-md-12">
+        <ul id="sortable">
+            <li ng-repeat="item in items">
+                <div class="item-container">
+                    
+                    {{item.name}}
+                    <br/>
+                    <span class="sm-list-category">{{item.category}}</span>
+                    
+                    <button type="button" 
+                        class="btn btn-danger"
+                        style="float:right;margin-top:-1.5em;">
+                        <span class="glyphicon glyphicon-remove"></span> Remove
+                    </button>
+                    
+                </div>
+            </li>
+        </ul>
     </div>
     
 </div>

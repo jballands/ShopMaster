@@ -67,6 +67,7 @@ body {
 }
 #sm-create-entry {
     margin-top: 150px;
+    text-align: center;
 }
 #sm-item-text-entry {
     font-size: 14pt;
@@ -75,25 +76,22 @@ body {
     font-size: 14pt;
     width: 100%;
 }
-.tt-dropdown-menu {
-    color: #292929;
-    width: 445px;
-    padding: 8px 0;
-    background-color: #FFFFFF;
-    border: 1px solid #ccc;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    -webkit-border-radius: 8px;
-    -moz-border-radius: 8px;
-    border-radius: 8px;
-    -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    -moz-box-shadow: 0 5px 10px rgba(0,0,0,.2);
-    box-shadow: 0 5px 10px rgba(0,0,0,.2);
+#sm-list {
+    padding-top: 25px;
+    width: 60%;
 }
-.tt-suggestion {
-    padding-left: 15px;
+#sm-list ul {
+    list-style-type: none;
 }
-.tt-cursor {
-    color: #FFFFFF;
-    background-color: #0058A3;
+#sm-list .item-container {
+    border-radius: 5px;
+    cursor: move;
+    padding: 5px 25px;
+    margin: 5px;
+    height: 3em;
+    background-color: #163E5D;
+}
+.sm-list-category {
+    font-size: 11pt;
 }
 

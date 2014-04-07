@@ -37,11 +37,10 @@ shopMaster.directive("sortable", function($compile) {
    
     return {
         restrict: "A",
-    
         link: function(scope, element, attrs){
             
-            element.sortable({
-                
+            // jQuery UI widget
+            element.sortable({  
                 deactivate: function(event, ui) {
                     
                     var from = angular.element(ui.item).scope().$index;
@@ -54,26 +53,25 @@ shopMaster.directive("sortable", function($compile) {
                             }
                         });
                     }
-                }
-                
+                }   
             });
-            
             element.disableSelection();
         }
     };
 });    
 
-shopMaster.directive("popover", function ($templateCache) {
+// All this directive is doing is showing a popover template. There's a problem,
+// however, with injecting the popover into the current scope.
+shopMaster.directive("popover", function ($templateCache, $compile) {
 
     return {
         restrict: "A",
-        
         link: function (scope, element, attrs) {
             
             $(element).popover({
                 trigger: "click",
                 html: true,
-                content: $templateCache.get("tools.html"),
+                content: $compile($templateCache.get("tools.html"))(scope),
                 placement: "bottom",
                 container: "body"
             });
@@ -377,6 +375,6 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http) {
     // List for the listReorderEvent emitted by the "dir-sortable" directive
     $scope.$on("listReorderedEvent", function(event, value) {
         $scope.items.splice(value.to, 0, $scope.items.splice(value.from, 1)[0]);
-    });
+    });  
 
 });

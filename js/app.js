@@ -129,7 +129,9 @@ shopMaster.controller("LandingCtrl", function($scope, $location, $http) {
 shopMaster.controller("CreateCtrl", function($scope, $location, $http) {
     
     $scope.warnFragile = true;
+    $scope.warnRefrigerated = true;
     $scope.warnFrozen = true;
+    $scope.searchCategory = undefined;
     
     $scope.items = [];
     
@@ -293,7 +295,7 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http) {
         {Name: "Produce", Aisle: "BL", Fragile: true},
         {Name: "Salad Dressing (Cold)", Aisle: "BL", Refrigerated: true},
         {Name: "Cake", Aisle: "BL", Fragile: true},
-        {Name: "Delicatessen", Aisle: "FL", Refrigerated: true, Fragile: true},
+        {Name: "Delicatessen", Aisle: "FL", Refrigerated: true},
         {Name: "Hot Meals", Aisle: "FL"},
         {Name: "Wine", Aisle: "FL"},
         {Name: "Cheese (Fancy)", Aisle: "FL"},
@@ -365,7 +367,8 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http) {
             return (category.Name == cat);
         });
         
-        $scope.items.unshift({ name: item, category: cat, aisle: wanted[0].Aisle });
+        $scope.items.unshift({ name: item, category: cat, aisle: wanted[0].Aisle, 
+                              fragile: wanted[0].Fragile, refrigerated: wanted[0].Refrigerated, frozen: wanted[0].Frozen});
         
         $scope.tbaItem = undefined;
         $scope.tbaCategory = undefined;
@@ -381,5 +384,9 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http) {
     $scope.$on("listReorderedEvent", function(event, value) {
         $scope.items.splice(value.to, 0, $scope.items.splice(value.from, 1)[0]);
     });  
-
+    
+    $scope.highlightedCategory = function(index) {
+        return $scope.items[index].category == $scope.searchCategory;
+    }
+   
 });

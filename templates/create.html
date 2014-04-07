@@ -8,17 +8,21 @@
         <label>
             <input type="checkbox" ng-model="warnFragile"> Fragile
         </label>
+        <br />        
+        <label>
+            <input type="checkbox" ng-model="warnRefrigerated"> Refrigerated
+        </label>
         <br />
         <label>
             <input type="checkbox" ng-model="warnFrozen"> Frozen
-        </label>
+        </label>        
         <br />
         <h4 style="color:#1671B8">Highlighting</h4>
         <input name="categoryTextView"
             type="text"
             class="form-control"
             id="sm-category-text-entry" 
-            ng-model="searchCategory"
+            ng-model="$parent.searchCategory"
             placeholder="Search for Category..."
             style="font-size:11pt;"
             typeahead="category.Name for category in categories | filter:$viewValue | limitTo:8">
@@ -101,7 +105,7 @@
         
         <ul sortable>
             <li ng-repeat="item in items">
-                <div class="item-container">
+                <div class="item-container" ng-class="{pink: item.fragile, blue: item.frozen, purple: item.refrigerated, tan: highlightedCategory($index)}">
                     
                     <div class="col-md-1" style="font-size:20pt;margin-top:8px;">
                         {{item.aisle}}

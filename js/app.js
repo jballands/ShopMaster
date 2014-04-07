@@ -58,7 +58,11 @@ shopMaster.directive("sortable", function($compile) {
             element.disableSelection();
         }
     };
-});    
+}); 
+
+shopMaster.directive("highlighter", function () {
+
+});
 
 // All this directive is doing is showing a popover template. There's a problem,
 // however, with injecting the popover into the current scope.
@@ -71,7 +75,7 @@ shopMaster.directive("popover", function ($templateCache, $compile) {
             $(element).popover({
                 trigger: "click",
                 html: true,
-                content: $compile($templateCache.get("tools.html"))(scope),
+                content: $compile($templateCache.get("tools.html"))(scope),     // Compile that shit!
                 placement: "bottom",
                 container: "body"
             });
@@ -123,6 +127,9 @@ shopMaster.controller("LandingCtrl", function($scope, $location, $http) {
 });
 
 shopMaster.controller("CreateCtrl", function($scope, $location, $http) {
+    
+    $scope.warnFragile = true;
+    $scope.warnFrozen = true;
     
     $scope.items = [];
     
@@ -357,8 +364,6 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http) {
         var wanted = $scope.categories.filter( function(category){
             return (category.Name == cat);
         });
-        
-        console.log(wanted[0].Aisle);
         
         $scope.items.unshift({ name: item, category: cat, aisle: wanted[0].Aisle });
         

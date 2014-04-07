@@ -133,6 +133,11 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http) {
     $scope.warnFrozen = true;
     $scope.searchCategory = undefined;
     
+    $scope.checkboxes = ['Fragile', 'Refrigerated', 'Frozen'];
+    
+    // Default checkboxes selected on start
+    $scope.selectedBoxes = ['Fragile', 'Refrigerated', 'Frozen'];
+    
     $scope.items = [];
     
     $scope.categories = [
@@ -388,5 +393,24 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http) {
     $scope.highlightedCategory = function(index) {
         return $scope.items[index].category == $scope.searchCategory;
     }
+    
+    $scope.toggleCheckbox = function toggleCheckbox(box) {
+        var index = $scope.selectedBoxes.indexOf(box);
+        
+        // currently selected
+        if (index > -1) {
+            $scope.selectedBoxes.splice(index, 1);
+        }
+        
+        // newly selected
+        else {
+            $scope.selectedBoxes.push(box);   
+        }
+    };
+    
+    // Is the checkbox selected or not?
+    $scope.isSelected = function(box) {
+        return $scope.selectedBoxes.indexOf(box) != -1
+    };
    
 });

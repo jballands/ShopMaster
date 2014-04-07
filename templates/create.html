@@ -69,7 +69,7 @@
                     ng-model="tbaCategory"
                     placeholder="Categorize this item..."
                     style="width:445px"
-                    typeahead="category for category in categories | filter:$viewValue | limitTo:8"
+                    typeahead="category.Name for category in categories | filter:$viewValue | limitTo:8"
                     required>
             </div>
             
@@ -90,7 +90,7 @@
         <h1 style="text-align:center;">Your List:</h1>
     </div>
     
-    <div id="sm-list" class="col-md-12">
+    <div id="sm-list" class="col-md-12" style="margin-bottom:50px;">
         
         <div id="sm-no-list" ng-show="items.length == 0">
             <span style="font-size:48pt;">No items :(</span>
@@ -102,16 +102,23 @@
             <li ng-repeat="item in items">
                 <div class="item-container">
                     
-                    {{item.name}}
-                    <br/>
-                    <span class="sm-list-category">{{item.category}}</span>
+                    <div class="col-md-1" style="font-size:20pt;margin-top:8px;">
+                        {{item.aisle}}
+                    </div>
+                    
+                    <div class="col-md-8">
+                        {{item.name}}
+                        <br />
+                        <span style="font-size:12pt;">{{item.category}}</span>
+                    </div>
                     
                     <button type="button" 
                         class="btn btn-danger"
-                        style="float:right;margin-top:-1.5em;"
+                        style="float:right;margin-top:.7em;"
                         ng-click="removeItem($index)">
-                        <span class="glyphicon glyphicon-remove"></span> Remove
+                            <span class="glyphicon glyphicon-remove"></span> Remove
                     </button>
+                    
                     
                 </div>
             </li>

@@ -44,15 +44,15 @@ shopMaster.service("GucciKrogesService", function() {
         }
         
         // Otherwise, operate on the populated list
-        var aisleConstant = 1;
+        var aisleConstant = 0.25;
         var accumulator = 5;
         var from = undefined;
         var to = undefined;
         var examIndex = 1;
         
         do {
-            from = list[examIndex - 1];
-            to = list[examIndex];
+            from = list[examIndex - 1].aisle;
+            to = list[examIndex].aisle;
             
             switch (from) {
                 case "FL":
@@ -69,6 +69,30 @@ shopMaster.service("GucciKrogesService", function() {
                     break;
                 case "FR":
                     from = "22";
+                    break;
+                case "A":
+                    from = "15";
+                    break;
+                case "B":
+                    from = "17";
+                    break;
+                case "C":
+                    from = "19";
+                    break;
+                case "D":
+                    from = "21";
+                    break;
+                case "E":
+                    from = "21";
+                    break;
+                case "F":
+                    from = "19";
+                    break;
+                case "G":
+                    from = "17";
+                    break;
+                case "H":
+                    from = "15";
                     break;
             }
             switch (to) {
@@ -87,17 +111,42 @@ shopMaster.service("GucciKrogesService", function() {
                 case "FR":
                     to = "22";
                     break;
+                case "A":
+                    to = "15";
+                    break;
+                case "B":
+                    to = "17";
+                    break;
+                case "C":
+                    to = "19";
+                    break;
+                case "D":
+                    to = "21";
+                    break;
+                case "E":
+                    to = "21";
+                    break;
+                case "F":
+                    to = "19";
+                    break;
+                case "G":
+                    to = "17";
+                    break;
+                case "H":
+                    to = "15";
+                    break;
             }
             to = parseInt(to);
             from = parseInt(from);
             // At this point, everything is in terms of a number
             
             var d = Math.abs(to - from);
+            console.log("To: " + to + ", from: " + from + ", --> d=" + d);
             accumulator = accumulator + (d * aisleConstant);
             
             // Increment
             examIndex++;
-        } while (examIndex < list.length - 1);
+        } while (examIndex < list.length);
         
         return accumulator;
     };
@@ -137,10 +186,6 @@ shopMaster.directive("sortable", function($compile) {
             element.disableSelection();
         }
     };
-}); 
-
-shopMaster.directive("highlighter", function () {
-
 });
 
 // All this directive is doing is showing a popover template. There's a problem,
@@ -218,6 +263,8 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
     $scope.selectedBoxes = ['Fragile', 'Refrigerated', 'Frozen'];
     
     $scope.items = [];
+    
+    $scope.projectedTime = 0;
     
     $scope.categories = [
         {Name: "Biscuits", Aisle: "21", Refrigerated: true},
@@ -457,18 +504,24 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
         $scope.tbaItem = undefined;
         $scope.tbaCategory = undefined;
         
-        // console.log($scope.items);
+        // Calculate the projected time
+        $scope.projectedTime = GucciKrogesService.calculateRouteTime($scope.items);
     };
     
     $scope.removeItem = function(index) {
         
         $scope.items.splice(index, 1);
         
+        // Calculate the projected time
+        $scope.projectedTime = GucciKrogesService.calculateRouteTime($scope.items);
     }
     
     // List for the listReorderEvent emitted by the "dir-sortable" directive
     $scope.$on("listReorderedEvent", function(event, value) {
         $scope.items.splice(value.to, 0, $scope.items.splice(value.from, 1)[0]);
+        
+        // Calculate the projected time
+        $scope.projectedTime = GucciKrogesService.calculateRouteTime($scope.items);
     });  
     
     $scope.highlightedCategory = function(index) {

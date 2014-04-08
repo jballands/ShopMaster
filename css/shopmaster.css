@@ -67,7 +67,7 @@ body {
     text-align: right;
 }
 #sm-create-entry {
-    margin-top: 150px;
+    margin-top: 50px;
     margin-left: 50px;
 }
 #sm-item-text-entry {
@@ -150,4 +150,10 @@ body {
     width: 79%;
     color: #86B8E0;
     display: inline-block;
+}
+
+#sm-output {
+    color: #86B8E0;
+    text-align: center;
+    margin-top: 100px;
 }

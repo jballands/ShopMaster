@@ -26,6 +26,85 @@ shopMaster.config(function($routeProvider) {
 });
 
 /*
+ *  ---------
+ *  Providers
+ *  ---------
+ */
+
+shopMaster.service("GucciKrogesService", function() {
+
+    this.calculateRouteTime = function(list) {
+        
+        // Check for an empty list
+        if (list.length == 0) {
+            return 0;
+        }
+        else if (list.length == 1) {
+            return 5;
+        }
+        
+        // Otherwise, operate on the populated list
+        var aisleConstant = 1;
+        var accumulator = 5;
+        var from = undefined;
+        var to = undefined;
+        var examIndex = 1;
+        
+        do {
+            from = list[examIndex - 1];
+            to = list[examIndex];
+            
+            switch (from) {
+                case "FL":
+                    from = "0";
+                    break;
+                case "BL":
+                    from = "0";
+                    break;
+                case "BK":
+                    from = "11";
+                    break;
+                case "BR":
+                    from = "22";
+                    break;
+                case "FR":
+                    from = "22";
+                    break;
+            }
+            switch (to) {
+                case "FL":
+                    to = "0";
+                    break;
+                case "BL":
+                    to = "0";
+                    break;
+                case "BK":
+                    to = "11";
+                    break;
+                case "BR":
+                    to = "22";
+                    break;
+                case "FR":
+                    to = "22";
+                    break;
+            }
+            to = parseInt(to);
+            from = parseInt(from);
+            // At this point, everything is in terms of a number
+            
+            var d = Math.abs(to - from);
+            accumulator = accumulator + (d * aisleConstant);
+            
+            // Increment
+            examIndex++;
+        } while (examIndex < list.length - 1);
+        
+        return accumulator;
+    };
+
+});
+
+/*
  *  ----------
  *  Directives
  *  ----------
@@ -126,11 +205,11 @@ shopMaster.controller("LandingCtrl", function($scope, $location, $http) {
 
 });
 
-shopMaster.controller("CreateCtrl", function($scope, $location, $http) {
+shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrogesService) {
     
-    $scope.warnFragile = true;
     $scope.warnRefrigerated = true;
     $scope.warnFrozen = true;
+    $scope.warnFragile = true;
     $scope.searchCategory = undefined;
     
     $scope.checkboxes = ['Fragile', 'Refrigerated', 'Frozen'];
@@ -294,9 +373,9 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http) {
         {Name: "Milk (Organic)", Aisle: "2", Refrigerated: true},
         {Name: "Beer", Aisle: "1", Refrigerated: true},
         {Name: "Fruit", Aisle: "BL", Fragile: true},
-        //{Name: "Apples", Aisle: "BL", Fragile: true},
+        // {Name: "Apples", Aisle: "BL", Fragile: true},
         {Name: "Potatoes", Aisle: "BL"},
-        //{Name: "Onions", Aisle: "BL"},
+        // {Name: "Onions", Aisle: "BL"},
         {Name: "Produce", Aisle: "BL", Fragile: true},
         {Name: "Salad Dressing (Cold)", Aisle: "BL", Refrigerated: true},
         {Name: "Cake", Aisle: "BL", Fragile: true},
@@ -306,8 +385,8 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http) {
         {Name: "Cheese (Fancy)", Aisle: "FL"},
         {Name: "Spreads (Hummus)", Aisle: "FL"},
         {Name: "Sushi", Aisle: "FL"},
-        {Name: "Beef", Aisle: "BK", Refrigerated: true},    // keep?
-        {Name: "Chicken", Aisle: "BK", Refrigerated: true}, // keep?
+        {Name: "Beef", Aisle: "BK", Refrigerated: true},    // keep? Answer: yes :)
+        {Name: "Chicken", Aisle: "BK", Refrigerated: true}, // keep? Answer: yes :)
         {Name: "Meat (Fresh)", Aisle: "BK", Refrigerated: true},
         {Name: "Seafood (Fresh)", Aisle: "BK", Refrigerated: true},
         {Name: "Meat (Organic)", Aisle: "BK", Refrigerated: true},
@@ -377,6 +456,8 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http) {
         
         $scope.tbaItem = undefined;
         $scope.tbaCategory = undefined;
+        
+        // console.log($scope.items);
     };
     
     $scope.removeItem = function(index) {

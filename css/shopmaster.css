@@ -89,22 +89,47 @@ body {
     border-radius: 5px;
     cursor: move;
     padding: 5px 25px;
-    margin: 5px;
+    margin: 10px;
     height: 3em;
     background-color: #163E5D;
 }
 
-.purple {
-    background-color: #e2e9f5 !important;
+.fragile {
+    background-color: #619624 !important;
 }
-.tan {
-    background-color: #f2ecda !important;
+.fragile.highlighted {
+    border: 3px solid #3f6414;
+    -moz-box-shadow:    0px 7px 0px 0px #273e0c;
+    -webkit-box-shadow: 0px 7px 0px 0px #273e0c;
+    box-shadow:         0px 7px 0px 0px #273e0c;
 }
-.blue {
-    background-color: #d6ecf1 !important;
+
+.frozen {
+    background-color: #0093ff !important;
 }
-.pink {
-    background-color: #f8e9ee !important;
+.frozen.highlighted {
+    border: 3px solid #005a9b;
+    -moz-box-shadow:    0px 7px 0px 0px #002c4b;
+    -webkit-box-shadow: 0px 7px 0px 0px #002c4b;
+    box-shadow:         0px 7px 0px 0px #002c4b;
+}
+
+.refrigerated {
+    background-color: #821e89 !important;
+}
+.refrigerated.highlighted {
+    border: 3px solid #4e1352;
+    -moz-box-shadow:    0px 7px 0px 0px #2d0b2f;
+    -webkit-box-shadow: 0px 7px 0px 0px #2d0b2f;
+    box-shadow:         0px 7px 0px 0px #2d0b2f;
+}
+
+/* Standard highlight */
+.highlighted {
+    border: 3px solid #0e273b;
+    -moz-box-shadow:    0px 7px 0px 0px #1d1d1d;
+    -webkit-box-shadow: 0px 7px 0px 0px #1d1d1d;
+    box-shadow:         0px 7px 0px 0px #1d1d1d;
 }
 
 #sm-no-list {
@@ -115,4 +140,14 @@ body {
     font-size: 11pt;
 }
 
-
+#aisle-marker {
+    width: 8%;
+    color: #86B8E0;
+    display: inline-block;
+    margin-left: 42px;
+}
+#item-marker {
+    width: 79%;
+    color: #86B8E0;
+    display: inline-block;
+}

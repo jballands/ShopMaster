@@ -88,17 +88,32 @@
         <h1 style="text-align:center;">Your List:</h1>
     </div>
     
-    <div id="sm-list" class="col-md-12" style="margin-bottom:50px;">
+    <div id="sm-list" class="col-md-12" style="margin-top:-20px;margin-bottom:50px;">
         
+        <!-- Markers -->
+        <div ng-show="items.length != 0">
+            <div id="aisle-marker">
+                Aisle
+            </div>
+            <div id="item-marker">
+                Item
+            </div>
+        </div>
+        
+        <!-- No list -->
         <div id="sm-no-list" ng-show="items.length == 0">
             <span style="font-size:48pt;">No items :(</span>
             <br/>
             Maybe you should try adding some items to your list?
         </div>
         
+        <!-- List -->
         <ul sortable>
             <li ng-repeat="item in items">
-                <div class="item-container" ng-class="{pink: item.fragile && isSelected('Fragile'), blue: item.frozen && isSelected('Frozen'), purple: item.refrigerated && isSelected('Refrigerated'), tan: highlightedCategory($index)}">
+                <div class="item-container" ng-class="{ refrigerated: item.refrigerated && isSelected('Refrigerated'),
+                                                      frozen: item.frozen && isSelected('Frozen'),
+                                                      fragile: item.fragile && isSelected('Fragile'),
+                                                      highlighted: highlightedCategory($index)}">
                     
                     <div class="col-md-1" style="font-size:20pt;margin-top:8px;">
                         {{item.aisle}}

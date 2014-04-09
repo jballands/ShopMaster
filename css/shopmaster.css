@@ -50,24 +50,35 @@ body {
     background-color: #163E5D;
 }
 #sm-tools {
-    display: inline-block;
-    height: 34px;
-    width: 33%;
+    padding: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+    margin-top: 12px;
 }
 #sm-logo {
-    display: inline-block;
-    font-size: 24pt;
+    font-size: 12pt;
+    color: #86B8E0;
     text-align: center;
     margin-top: 5px;
-    width: 33%;
 }
 #sm-logo-name {
+    font-size: 24pt;
+    position: relative;
+    color: #FFFFFF;
+    top: 0;
     font-family: "Dancing Script";
 }
+#sm-logo-stats {
+    position: relative;
+    top: 0;
+}
 #sm-done {
-    display: inline-block;
-    width: 33%;
-    height: 34px;
+    padding: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    margin-bottom: 0 !important;
+    margin-top: 12px;
     text-align: right;
 }
 

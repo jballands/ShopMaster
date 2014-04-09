@@ -62,6 +62,12 @@ body {
     text-align: center;
     margin-top: 5px;
 }
+#sm-logo-mob {
+    font-size: 12pt;
+    color: #86B8E0;
+    text-align: left;
+    margin-top: 5px;
+}
 #sm-logo-name {
     font-size: 24pt;
     position: relative;
@@ -85,6 +91,10 @@ body {
 #sm-create-entry {
     margin-left: 50px;
 }
+#sm-create-entry-mob {
+    margin-left: 50px;
+    margin-top: 100px;
+}
 #sm-item-text-entry {
     font-size: 14pt;
 }
@@ -104,9 +114,31 @@ body {
     border-radius: 5px;
     cursor: move;
     padding: 5px 25px;
-    margin: 10px;
+    margin-left: 5px;
     height: 3em;
     background-color: #163E5D;
+    display: inline-block;
+    width: 91%;
+}
+
+#sm-item-index {
+    min-width: 35px;
+    display: inline-block;
+    text-align: right;
+    float: left;
+    margin-top: 17px;
+    padding-right: 10px;
+    color: #86B8E0;
+}
+
+#sm-list .item-container-mob {
+    cursor: move;
+    height: 100px;
+    background-color: #C8DEF3;
+    border-top: 1px solid #7691AC;
+    border-bottom: 1px solid #7691AC;
+    height: 50px;
+    line-height: 50px;
 }
 
 .fragile {
@@ -159,7 +191,7 @@ body {
     width: 8%;
     color: #86B8E0;
     display: inline-block;
-    margin-left: 42px;
+    margin-left: 65px;
 }
 #item-marker {
     width: 79%;

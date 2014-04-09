@@ -143,11 +143,15 @@
         <!-- List -->
         <ul sortable>
             <li ng-repeat="item in items">
+
+                <div id="sm-item-index">
+                    {{$index + 1}}
+                </div>
                 <div class="item-container" ng-class="{ refrigerated: item.refrigerated && isSelected('Refrigerated'),
                                                       frozen: item.frozen && isSelected('Frozen'),
                                                       fragile: item.fragile && isSelected('Fragile'),
                                                       highlighted: highlightedCategory($index)}">
-                    
+
                     <div class="col-md-1" style="font-size:20pt;margin-top:8px;">
                         {{item.aisle}}
                     </div>
@@ -162,7 +166,7 @@
                         ng-click="removeItem($index)">
                             <span class="glyphicon glyphicon-remove"></span> Remove
                     </button>
-                    
+
                 </div>
             </li>
         </ul>

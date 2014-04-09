@@ -51,23 +51,27 @@ body {
 }
 #sm-tools {
     display: inline-block;
+    height: 34px;
     width: 33%;
 }
 #sm-logo {
     display: inline-block;
-    font-family: "Dancing Script";
     font-size: 24pt;
     text-align: center;
     margin-top: 5px;
     width: 33%;
 }
+#sm-logo-name {
+    font-family: "Dancing Script";
+}
 #sm-done {
     display: inline-block;
     width: 33%;
+    height: 34px;
     text-align: right;
 }
+
 #sm-create-entry {
-    margin-top: 50px;
     margin-left: 50px;
 }
 #sm-item-text-entry {

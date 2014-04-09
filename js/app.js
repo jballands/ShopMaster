@@ -44,7 +44,7 @@ shopMaster.service("GucciKrogesService", function() {
         }
         
         // Otherwise, operate on the populated list
-        var aisleConstant = 0.25;
+        var aisleConstant = 0.3;
         var accumulator = 5;
         var from = undefined;
         var to = undefined;
@@ -141,14 +141,13 @@ shopMaster.service("GucciKrogesService", function() {
             // At this point, everything is in terms of a number
             
             var d = Math.abs(to - from);
-            console.log("To: " + to + ", from: " + from + ", --> d=" + d);
             accumulator = accumulator + (d * aisleConstant);
             
             // Increment
             examIndex++;
         } while (examIndex < list.length);
         
-        return accumulator;
+        return Math.round(accumulator);
     };
 
 });
@@ -257,7 +256,9 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
     $scope.warnFragile = true;
     $scope.searchCategory = undefined;
     
-    $scope.checkboxes = ['Fragile', 'Refrigerated', 'Frozen'];
+    $scope.checkboxes = [{name: "Fragile", color: "#619624"}, 
+                         {name: "Refrigerated", color: "#821e89"}, 
+                         {name: "Frozen", color: "#0093ff"}];
     
     // Default checkboxes selected on start
     $scope.selectedBoxes = ['Fragile', 'Refrigerated', 'Frozen'];

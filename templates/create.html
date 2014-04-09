@@ -7,7 +7,7 @@
         <h4 style="color:#1671B8">Warnings</h4>
         <div ng-repeat="checkbox in checkboxes">
             <label>
-                <input type="checkbox" value="{{checkbox}}" ng-checked="selectedBoxes.indexOf(checkbox) > -1" ng-click="toggleCheckbox(checkbox)"> {{checkbox}}
+                <input type="checkbox" value="{{checkbox.name}}" ng-checked="selectedBoxes.indexOf(checkbox.name) > -1" ng-click="toggleCheckbox(checkbox.name)"> <div style="width:12px;height:12px;display:inline-block;background-color:{{checkbox.color}}"></div> {{checkbox.name}}
             </label>
         </div>
         <h4 style="color:#1671B8">Highlighting</h4>
@@ -16,10 +16,29 @@
             class="form-control"
             id="sm-category-text-entry" 
             ng-model="$parent.searchCategory"
-            placeholder="Search for Category..."
+            placeholder="Search for a category..."
             style="font-size:11pt;"
             typeahead="category.Name for category in categories | filter:$viewValue | limitTo:8">
     </div>
+</script>
+
+<script>
+    $(document).ready(function() {
+        
+        $("#sm-logo-stats").hide();
+        
+        $(window).scroll(function() {
+            if ($(window).scrollTop() > $("#sm-output").position().top) {
+                $("#sm-logo-name").slideUp();
+                $("#sm-logo-stats").slideDown();
+            }
+            else {                  
+                $("#sm-logo-stats").slideUp();
+                $("#sm-logo-name").slideDown();
+            }
+        });
+        
+    });
 </script>
 
 <!-- Content -->
@@ -29,10 +48,18 @@
         <button type="button" class="btn btn-primary" style="margin-left:15px;" popover>
             <span class="glyphicon glyphicon-th"></span> Tools
         </button>
+        <button type="button" class="btn btn-primary" style="display:inline-block;" popover>
+            <span class="glyphicon glyphicon-question-sign"></span> Assist Me
+        </button>
     </div>
     
     <div id="sm-logo">
-        ShopMaster
+        <div id="sm-logo-name">
+            ShopMaster
+        </div>
+        <div id="sm-logo-stats">
+            {{projectedTime}} mins, {{items.length}} items
+        </div>
     </div>
     
     <div id="sm-done">

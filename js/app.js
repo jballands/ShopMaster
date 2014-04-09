@@ -14,6 +14,7 @@ var shopMaster = angular.module("shopMaster", ["ngRoute", "ui.bootstrap"]);
  */
 
 shopMaster.config(function($routeProvider) {
+    
     $routeProvider.when("/", {
         templateUrl: "templates/landing.html",
         controller: "LandingCtrl"
@@ -221,11 +222,11 @@ shopMaster.controller("LandingCtrl", function($scope, $location, $http) {
         // DEBUG
         $location.path("/create");
         
-        /*var emailAddress = $scope.emailAddress;
+        var emailAddress = $scope.emailAddress;
         
         // Fire AJAX request
-        $http({method: "GET", 
-               url: "http://shopmasterbackend-env-pjjgskpgzv.elasticbeanstalk.com/emailVerify/" + emailAddress}).
+        $http({method: "GET",
+               url: "http://ShopMaster-env-t3g9xum3wb.elasticbeanstalk.com/emailVerify/" + emailAddress}).
             
             success(function(data, status, headers, config) {
                 // Handle success
@@ -244,7 +245,7 @@ shopMaster.controller("LandingCtrl", function($scope, $location, $http) {
             });
         
         // Show loading animation
-        $("#sm-loading-landing").css({"visibility": "visible"});*/
+        $("#sm-loading-landing").css({"visibility": "visible"});
     };
 
 });

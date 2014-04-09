@@ -1,0 +1,91 @@
+<!-- jQuery UI -->
+<script src="./js/jquery-ui-1.10.4.custom.min.js"></script>
+
+<!-- Content -->
+<div id="sm-navi">
+    
+    <div id="sm-logo-mob" class="col-md-6">
+        <div id="sm-logo-name">
+            ShopMaster
+        </div>
+    </div>
+    
+    <div id="sm-done" class="col-md-6">
+        <button type="button" class="btn btn-success" style="margin-right:15px;">
+            Done <span class="glyphicon glyphicon-send"></span>
+        </button>
+    </div>
+    
+</div>
+
+<div class="container">
+    
+    <div id="sm-create-entry-mob">
+        
+        <form role="form" name="createForm" novalidate>
+            
+            <div class="col-md-5">
+                <input name="itemTextView"
+                    type="text"
+                    class="form-control"
+                    ng-model="tbaItem"
+                    id="sm-item-text-entry" 
+                    placeholder="Type a grocery item..."
+                    required>
+            </div>
+            
+            <div class="col-md-5">
+                <input name="categoryTextView"
+                    type="text"
+                    class="form-control"
+                    id="sm-category-text-entry" 
+                    ng-model="tbaCategory"
+                    placeholder="Categorize this item..."
+                    style="width:445px"
+                    typeahead="category.Name for category in categories | filter:$viewValue | limitTo:8"
+                    required>
+            </div>
+            
+            <div class="col-md-1" style="margin-left:20px;">
+                <button type="button" 
+                        class="btn btn-info"
+                        ng-disabled="createForm.$invalid"
+                        ng-click="addItem()">
+                    <span class="glyphicon glyphicon-plus"></span> Add
+                </button>
+            </div>
+            
+        </form>
+        
+    </div>
+    
+    <div id="sm-list" class="col-md-12" style="margin-top:-20px;margin-bottom:50px;">
+        
+        <!-- No list -->
+        <div id="sm-no-list" ng-show="items.length == 0">
+            <span style="font-size:48pt;">Uh-oh...</span>
+            <br/>
+            You didn't add any items before going shopping!
+        </div>
+        
+        <!-- List -->
+        <ul sortable>
+            <li class="li-mob" ng-repeat="item in items">
+                <div class="item-container-mob">
+                    <div class="col-md-1">
+                        <label>
+                            <input type="checkbox" name="gotItem" style="text-align:center; vertical-align:middle">
+                        </label>
+                    </div>
+                    <div class="col-md-9">
+                        {{item.name}}
+                    </div>
+                    <div class="col-md-2" style="text-align: right">
+                        {{item.aisle}}
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
+</div>

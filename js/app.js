@@ -22,6 +22,11 @@ shopMaster.config(function($routeProvider) {
     $routeProvider.when("/create", {
         templateUrl: "templates/create.html",
         controller: "CreateCtrl"
+    }),
+    
+    $routeProvider.when("/mobile", {
+        templateUrl: "templates/mobile.html",
+        controller: "CreateCtrl"
     });
 });
 
@@ -548,4 +553,8 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
         return $scope.selectedBoxes.indexOf(box) != -1
     };
    
+});
+
+shopMaster.controller("MobileCtrl", function($scope, $location, $http) {
+    
 });

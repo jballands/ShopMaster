@@ -1,5 +1,5 @@
 /*
- *  app.js (Angular.js front-end processing)
+ *  core.js (Angular.js front-end processing)
  *  By Jonathan Ballands, Sloane Neidig, and Brad Retterer
  *  
  *  (C)2014 All Rights Reserved.
@@ -224,23 +224,25 @@ shopMaster.controller("LandingCtrl", function($scope, $location, $http) {
     // Verify email
     $scope.verifyEmail = function() {
         
-        // DEBUG
-        $location.path("/create");
-        
         var emailAddress = $scope.emailAddress;
         
         // Fire AJAX request
         $http({method: "GET",
-               url: "http://ShopMaster-env-t3g9xum3wb.elasticbeanstalk.com/emailVerify/" + emailAddress}).
+               url: "/api/emailVerify/" + emailAddress}).
             
             success(function(data, status, headers, config) {
                 // Handle success
                 $("#sm-loading-landing").css({"visibility": "invisible"});
                 
-                // TODO: Check result to see if it was true or false
+                console.log(data);
                 
-                // Route to create
-                $location.path("templates/create.html");
+                if (data.available == true) {
+                    // Route to create
+                    $location.path("/create");
+                } else {
+                    // TODO: Route to mobile part
+                }
+                    
             }).
             error(function(data, status, headers, config) {
                 // Handle error

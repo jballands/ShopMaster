@@ -4,13 +4,13 @@
 <!-- Content -->
 <div id="sm-navi">
     
-    <div id="sm-logo-mob" class="col-xs-6">
+    <div id="sm-logo-mob" class="col-md-6">
         <div id="sm-logo-name">
             ShopMaster
         </div>
     </div>
     
-    <div id="sm-done" class="col-xs-6">
+    <div id="sm-done" class="col-md-6">
         <button type="button" class="btn btn-success" style="margin-right:15px;">
             Done <span class="glyphicon glyphicon-send"></span>
         </button>
@@ -18,30 +18,9 @@
     
 </div>
 
-<div id="sm-list-mob">
+<div class="container">
     
-    <ul sortable>
-        <li ng-repeat="item in items">
-            <div class="item-container-mob">
-                <div class="col-xs-1">
-                    <label>
-                        <input type="checkbox" name="gotItem" style="position: relative; top: 12px" />
-                    </label>
-                </div>
-                
-                <div class="col-xs-8" style="text-align: left">
-                    {{item.name}}
-                </div>
-                
-                <div class="col-xs-3" style="text-align: right">
-                    {{item.aisle}}
-                </div>
-                <br />
-            </div>
-        </li>
-    </ul>
-    
-    <div id="mobile-test-add">
+    <div id="sm-create-entry-mob">
         
         <form role="form" name="createForm" novalidate>
             
@@ -79,4 +58,34 @@
         </form>
         
     </div>
+    
+    <div id="sm-list" class="col-md-12" style="margin-top:-20px;margin-bottom:50px;">
+        
+        <!-- No list -->
+        <div id="sm-no-list" ng-show="items.length == 0">
+            <span style="font-size:48pt;">Uh-oh...</span>
+            <br/>
+            You didn't add any items before going shopping!
+        </div>
+        
+        <!-- List -->
+        <ul sortable>
+            <li class="li-mob" ng-repeat="item in items">
+                <div class="item-container-mob">
+                    <div class="col-md-1">
+                        <label>
+                            <input type="checkbox" name="gotItem" style="text-align:center; vertical-align:middle">
+                        </label>
+                    </div>
+                    <div class="col-md-9">
+                        {{item.name}}
+                    </div>
+                    <div class="col-md-2" style="text-align: right">
+                        {{item.aisle}}
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    
 </div>

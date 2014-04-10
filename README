@@ -1,0 +1,42 @@
+~!--- HOW TO TEST SHOPMASTER LOCALLY ---!~
+
+Since we will be using Node.js as the server, you will no longer need
+to use MAMP/WAMP to run ShopMaster. Instead, you will need to install
+Node.js on your machine, as well as something called npm (Node Package
+Manager). Go to http://nodejs.org/ to learn more.
+
+~STEPS TO GET SETUP~
+
+1. Install Node.js and npm on your machine.
+
+2. Navigate to the ShopMaster folder in your terminal and type: 
+   "npm install"
+   
+   This will install all of ShopMaster's dependencies (it only has one
+   called Express. Everything else is handled by Angular.js, which we
+   reference from the HTML. Express is a library for Node.js.)
+   
+And you're ready to develop!
+
+~STEPS TO DEVELOP~
+
+1. When you're ready to develop, navigate to the ShopMaster folder in
+   your terminal and type:
+   "node server"
+   
+   If the server starts, you should see the following output in your terminal:
+   "Server listening on port xxxx"
+   
+   This port xxxx is the port on the localhost that Node.js decided to bind to.
+
+2. Open up your favorite web browser and navigate to:
+   "localhost:xxxx"
+   
+   Where xxxx is the port number that Node.js has bound to.
+   
+And you're off to the races! :) With this design, the server IS INDEED logging data!!
+So, treat this local server JUST LIKE YOU WOULD THE REAL SERVER!! In other words,
+if you create a list, save it, and type the email again, you SHOULD get routed to
+the mobile site! (Of course, we still need to code that part.)
+
+Have fun!

@@ -25,6 +25,10 @@ body {
   margin-left: 200px;
 }
 
+#mobile-test-add{
+    margin-top: 200px;
+}
+
 
 #sm-login-slide {
   width: 35%;
@@ -102,7 +106,8 @@ body {
     font-size: 14pt;
 }
 #sm-list {
-    padding-top: 25px;
+    padding: 0;
+    margin: 0;
 }
 #sm-list ul {
     list-style-type: none;
@@ -131,14 +136,31 @@ body {
     color: #86B8E0;
 }
 
-#sm-list .item-container-mob {
-    cursor: move;
-    height: 100px;
+#sm-list-mob {
+    margin: 0;
+    padding: 0;
     background-color: #C8DEF3;
-    border-top: 1px solid #7691AC;
-    border-bottom: 1px solid #7691AC;
+    padding-top: 60px;
+}
+
+#sm-list-mob ul {
+    list-style-type: none;
+    margin: 0px;
+    padding: 0px;
+}
+
+#sm-list-mob li {
     height: 50px;
     line-height: 50px;
+    border-bottom: 1px solid #7691AC;  
+}
+
+#sm-list .item-container-mob {
+    cursor: move;
+    background-color: #C8DEF3;
+    height: 50px;
+    line-height: 50px;
+    width: 100%;
 }
 
 .fragile {

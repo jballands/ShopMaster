@@ -1,18 +1,11 @@
 /*
-app.get("/emailVerify/:email", lists.emailVerify);   // GET
-app.post("/listAdd", lists.listAdd);                 // POST
-app.get("/listDrop/:email", lists.listDrop);         // GET
-app.get("/listGet/:email", lists.listGet);           // GET
-*/
-
-/*
  *  server.js (node.js back-end processing)
  *  By Jonathan Ballands, Sloane Neidig, and Brad Retterer
  *  
  *  (C)2014 All Rights Reserved.
  */
 
-// Express and AWS
+// Express
 var express = require("express");
 var app = express();
 var port = process.env.PORT || 8080;

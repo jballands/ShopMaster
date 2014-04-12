@@ -1,3 +1,10 @@
+/*
+ *  routes.js
+ *  By Jonathan Ballands, Sloane Neidig, and Brad Retterer
+ *  
+ *  (C)2014 All Rights Reserved.
+ */
+
 var ListDict = {};
 
 module.exports = function(app) {

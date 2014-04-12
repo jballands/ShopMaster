@@ -193,8 +193,7 @@ shopMaster.directive("sortable", function($compile) {
     };
 });
 
-// All this directive is doing is showing a popover template. There's a problem,
-// however, with injecting the popover into the current scope.
+// All this directive is doing is showing a popover template.
 shopMaster.directive("popover", function ($templateCache, $compile) {
 
     return {
@@ -274,6 +273,9 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
     $scope.items = [];
     
     $scope.projectedTime = 0;
+    
+    // Used to determine if we should show the user tooltips
+    $scope.needsHelp = true;
     
     $scope.categories = [
         {Name: "Biscuits", Aisle: "21", Refrigerated: true},
@@ -515,6 +517,13 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
         
         // Calculate the projected time
         $scope.projectedTime = GucciKrogesService.calculateRouteTime($scope.items);
+        
+        if ((wanted[0].Fragile || wanted[0].Refrigerated || wanted[0].Frozen) && $scope.needsHelp) {
+            $("#sm-tools-btn").tooltip({ title: "Click here to toggle colors.", 
+                                        trigger: "manual", 
+                                        placement: "bottom" });
+            $("#sm-tools-btn").tooltip("show");
+        }
     };
     
     $scope.removeItem = function(index) {
@@ -554,6 +563,21 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
     // Is the checkbox selected or not?
     $scope.isSelected = function(box) {
         return $scope.selectedBoxes.indexOf(box) != -1
+    };
+    
+    $scope.onToolsClick = function() {
+        $("#sm-tools-btn").tooltip("destroy");
+        $(".popover").tooltip({ title: "Be aware that some items need to kept cold or may crush easily." +
+                                       " Take this into account when organizing your shopping list!", 
+                                trigger: "manual", 
+                                placement: "right" });
+        if ($scope.needsHelp == true) {
+            $(".popover").tooltip("show");
+            $scope.needsHelp = false;
+        }
+        else {
+            $(".popover").tooltip("destroy");
+        }
     };
    
 });

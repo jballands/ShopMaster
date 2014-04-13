@@ -28,6 +28,11 @@ shopMaster.config(function($routeProvider) {
     $routeProvider.when("/mobile", {
         templateUrl: "templates/mobile.html",
         controller: "CreateCtrl"
+    }),
+        
+    $routeProvider.when("/create_done", {
+        templateUrl: "templates/create_done.html",
+        controller: "CreateDoneCtrl"
     });
 });
 
@@ -36,6 +41,10 @@ shopMaster.config(function($routeProvider) {
  *  Providers
  *  ---------
  */
+
+shopMaster.value("UserEmailProvider", {
+    email: ""
+});
 
 shopMaster.service("GucciKrogesService", function() {
 
@@ -151,6 +160,7 @@ shopMaster.service("GucciKrogesService", function() {
             
             // Increment
             examIndex++;
+            
         } while (examIndex < list.length);
         
         return Math.round(accumulator);
@@ -189,7 +199,6 @@ shopMaster.directive("sortable", function($compile) {
                             }
                         });
                     }
-                    console.log("RAWR");
                 }   
             });
             element.disableSelection();
@@ -222,7 +231,7 @@ shopMaster.directive("popover", function ($templateCache, $compile) {
  * -----------
  */
 
-shopMaster.controller("LandingCtrl", function($scope, $location, $http) {
+shopMaster.controller("LandingCtrl", function($scope, $location, $http, UserEmailProvider) {
     
     // Verify email
     $scope.verifyEmail = function() {
@@ -237,13 +246,12 @@ shopMaster.controller("LandingCtrl", function($scope, $location, $http) {
                 // Handle success
                 $("#sm-loading-landing").css({"visibility": "invisible"});
                 
-                console.log(data);
-                
                 if (data.available == true) {
                     // Route to create
+                    UserEmailProvider.email = emailAddress;
                     $location.path("/create");
                 } else {
-                    // TODO: Route to mobile part
+                    $location.path("/mobile");
                 }
                     
             }).
@@ -260,12 +268,14 @@ shopMaster.controller("LandingCtrl", function($scope, $location, $http) {
 
 });
 
-shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrogesService) {
+shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrogesService, UserEmailProvider) {
     
     $scope.warnRefrigerated = true;
     $scope.warnFrozen = true;
     $scope.warnFragile = true;
     $scope.searchCategory = undefined;
+    
+    $scope.disableSendToPhone = false;
     
     $scope.checkboxes = [{name: "Fragile", color: "#619624"}, 
                          {name: "Refrigerated", color: "#821e89"}, 
@@ -281,6 +291,7 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
     // Used to determine if we should show the user tooltips
     $scope.needsHelp = true;
     $scope.needsDrag = true;
+    $scope.needsOutputHelp = true;
     
     $scope.categories = [
         {Name: "Biscuits", Aisle: "21", Refrigerated: true},
@@ -506,6 +517,11 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
     
     $scope.addItem = function(items) {
         
+        // Destroy the tooltip, if possible
+        $("#sm-item-text-entry").tooltip("destroy");
+        $("#sm-category-text-entry").tooltip("destroy");
+        $("#sm-projected-time").tooltip("destroy");
+        
         var item = $scope.tbaItem;
         var cat = $scope.tbaCategory;
         
@@ -533,11 +549,22 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
         
         // Need to tell user to drag?
         if ($scope.items.length > 1 && $scope.needsDrag == true) {
-            $("#sm-item-container-0").tooltip({ title: "Drag me around!", 
+            $("#sm-item-container-0").tooltip({ title: "Play around with your projected shopping time by dragging" 
+                                               + " items around.", 
                                         trigger: "manual", 
-                                        placement: "right" });
+                                        placement: "top" });
             $("#sm-item-container-0").tooltip("show");
             $scope.needsDrag = false;
+        }
+        
+        // Show the user the wonders of the time
+        if ($scope.items.length == 1 && $scope.needsOutputHelp) {
+            $("#sm-projected-time").tooltip({ title: "Pay attention to the amount of time ShopMaster thinks"
+                                             + " you'll spend shopping with this list order!", 
+                                        trigger: "manual", 
+                                        placement: "left" });
+            $("#sm-projected-time").tooltip("show");
+            $scope.needsOutputHelp = false;
         }
     };
     
@@ -547,7 +574,23 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
         
         // Calculate the projected time
         $scope.projectedTime = GucciKrogesService.calculateRouteTime($scope.items);
-    }
+    };
+    
+    $scope.sendToPhone = function() {
+        $scope.disableSendToPhone = true;
+        
+        // Fire AJAX request
+        $http.post("/api/listAdd/", {email: UserEmailProvider.email, list: $scope.items}).
+            
+            success(function(data, status, headers, config) {
+                // Do something on success... 
+                $location.path("/create_done");
+            }).
+            error(function(data, status, headers, config) {
+                // Do something on error...
+                $scope.disableSendToPhone = false;
+            });
+    };
     
     // List for the listReorderEvent emitted by the "dir-sortable" directive
     $scope.$on("listReorderedEvent", function(event, value) {
@@ -559,7 +602,7 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
     
     $scope.highlightedCategory = function(index) {
         return $scope.items[index].category == $scope.searchCategory;
-    }
+    };
     
     $scope.toggleCheckbox = function toggleCheckbox(box) {
         var index = $scope.selectedBoxes.indexOf(box);
@@ -597,6 +640,12 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
    
 });
 
+shopMaster.controller("CreateDoneCtrl", function($scope, $location) {
+    $scope.directBackToLanding = function() {
+        $location.path("/");
+    }
+});
+
 shopMaster.controller("MobileCtrl", function($scope, $location, $http) {
-    
+    // Control something...
 });

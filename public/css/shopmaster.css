@@ -214,3 +214,25 @@ body {
     max-width: 275px;
     font-size: 11pt;
 }
+
+#sm-create-done-title-slide {
+    font-family: "Dancing Script";
+    font-size: 72pt;
+    margin-top: 125px;
+    text-align: center;
+}
+#sm-create-done-content {
+    width: 75%;
+    margin-top: 35px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+#sm-create-done-instruct {
+    color:#86B8E0;
+    font-size:14pt;
+    padding-top:10px;
+}
+#sm-got-it-btn {
+    margin-top: 20px;
+}

@@ -32,6 +32,10 @@ module.exports = function(app) {
         var email = req.body.email;
         var list = req.body.list;    
         ListDict[email] = list;
+        
+        console.log("The server now has the following data: ");
+        console.log(ListDict);
+        
         res.send(200);
     
     });

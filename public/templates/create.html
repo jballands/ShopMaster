@@ -10,7 +10,7 @@
                 <input type="checkbox" value="{{checkbox.name}}" ng-checked="selectedBoxes.indexOf(checkbox.name) > -1" ng-click="toggleCheckbox(checkbox.name)"> <div style="width:12px;height:12px;display:inline-block;background-color:{{checkbox.color}}"></div> {{checkbox.name}}
             </label>
         </div>
-        <h4 style="color:#1671B8">Highlight Items</h4>
+        <h4 style="color:#1671B8">Find Similar Items</h4>
         <input name="categoryTextView"
             type="text"
             class="form-control"
@@ -37,6 +37,14 @@
                 $("#sm-logo-name").slideDown();
             }
         });
+        
+        $("#sm-item-text-entry").tooltip({ title: "Start by typing a grocery item.", 
+                                        trigger: "focus", 
+                                        placement: "top" });
+        $("#sm-category-text-entry").tooltip({ title: "What kind of item do you think this would be categorized as?" 
+                                                            + " For example, 'Sprite' would be 'soda'.", 
+                                                    trigger: "focus", 
+                                                    placement: "top" });
     });
 </script>
 
@@ -94,7 +102,11 @@
     </div>
     
     <div id="sm-done" class="col-md-4">
-        <button type="button" class="btn btn-success" style="margin-right:15px;">
+        <button type="button" 
+                class="btn btn-success" 
+                ng-click="sendToPhone()" 
+                ng-disabled="disableSendToPhone || items.length < 1"
+                style="margin-right:15px;">
             Send to Phone <span class="glyphicon glyphicon-send"></span>
         </button>
     </div>
@@ -104,7 +116,7 @@
 <div class="container">
     
     <div id="sm-output">
-        <span style="font-size:72pt;color:#FFFFFF;">{{projectedTime}}</span> mins
+        <span style="font-size:72pt;color:#FFFFFF;" id="sm-projected-time">{{projectedTime}}</span> mins
         <span style="font-size:72pt;margin-left:50px;color:#FFFFFF;">{{items.length}}</span> items
     </div>
     

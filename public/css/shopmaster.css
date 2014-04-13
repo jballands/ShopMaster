@@ -24,7 +24,12 @@ body {
   font-size: 20pt;
   margin-left: 200px;
 }
-
+#sm-credit {
+    color: #86B8E0;
+    text-align: center;
+    margin-top: 25px;
+    font-size: 13pt;
+}
 
 #sm-login-slide {
   width: 35%;

@@ -173,7 +173,10 @@ shopMaster.directive("sortable", function($compile) {
         link: function(scope, element, attrs){
             
             // jQuery UI widget
-            element.sortable({  
+            element.sortable({
+                activate: function(event, ui) {
+                    $("#sm-item-container-0").tooltip("destroy");
+                },
                 deactivate: function(event, ui) {
                     
                     var from = angular.element(ui.item).scope().$index;
@@ -186,6 +189,7 @@ shopMaster.directive("sortable", function($compile) {
                             }
                         });
                     }
+                    console.log("RAWR");
                 }   
             });
             element.disableSelection();
@@ -276,6 +280,7 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
     
     // Used to determine if we should show the user tooltips
     $scope.needsHelp = true;
+    $scope.needsDrag = true;
     
     $scope.categories = [
         {Name: "Biscuits", Aisle: "21", Refrigerated: true},
@@ -518,11 +523,21 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
         // Calculate the projected time
         $scope.projectedTime = GucciKrogesService.calculateRouteTime($scope.items);
         
+        // Need to show tools off?
         if ((wanted[0].Fragile || wanted[0].Refrigerated || wanted[0].Frozen) && $scope.needsHelp) {
             $("#sm-tools-btn").tooltip({ title: "Click here to toggle colors.", 
                                         trigger: "manual", 
                                         placement: "bottom" });
             $("#sm-tools-btn").tooltip("show");
+        }
+        
+        // Need to tell user to drag?
+        if ($scope.items.length > 1 && $scope.needsDrag == true) {
+            $("#sm-item-container-0").tooltip({ title: "Drag me around!", 
+                                        trigger: "manual", 
+                                        placement: "right" });
+            $("#sm-item-container-0").tooltip("show");
+            $scope.needsDrag = false;
         }
     };
     
@@ -568,7 +583,7 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
     $scope.onToolsClick = function() {
         $("#sm-tools-btn").tooltip("destroy");
         $(".popover").tooltip({ title: "Be aware that some items need to kept cold or may crush easily." +
-                                       " Take this into account when organizing your shopping list!", 
+                                       " These tools can help you organize your list accordingly.", 
                                 trigger: "manual", 
                                 placement: "right" });
         if ($scope.needsHelp == true) {

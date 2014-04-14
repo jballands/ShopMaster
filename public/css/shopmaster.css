@@ -1,8 +1,8 @@
 body {
-  font-family: "Bitter";
-  font-size: 16pt;
-  background-color: #1671B8;
-  color: #FFFFFF;
+    font-family: "Bitter";
+    font-size: 16pt;
+    background-color: #1671B8;
+    color: #FFFFFF;
 }
 
 .has-error input {
@@ -226,7 +226,6 @@ body {
 /*
  *  MOBILE
  */
-
 #sm-logo-mob {
     font-size: 12pt;
     color: #86B8E0;
@@ -250,4 +249,5 @@ body {
     background-color: #163E5D;
     display: inline-block;
     width: 100%;
+    padding-left: 13px;
 }

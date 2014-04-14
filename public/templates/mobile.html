@@ -22,10 +22,10 @@
 
     <ul sortable>
         <li ng-repeat="item in items">
-            <div class="item-container">
+            <div class="item-container" ng-class="{smitemdisabled: item.disabled}">
                 <div class="col-xs-1">
                     <label>
-                        <input type="checkbox" style="position: relative; top: 20px" />
+                        <input type="checkbox" style="position: relative; top: 20px" ng-model="itemCheckBox" ng-change="disableItem($index)"/>
                     </label>
                 </div>
 
@@ -60,6 +60,7 @@
             <div class="col-xs-3">
                 <button type="button" 
                         class="btn btn-info"
+                        ng-click="quickAddItem()"
                         ng-disabled="quickAddForm.$invalid">
                     <span class="glyphicon glyphicon-plus"></span> Add
                 </button>

@@ -265,3 +265,7 @@ body {
 #sm-quick-add-form {
      margin-top: 16px;  
 }
+.smitemdisabled {
+    background-color: #C4C4C4 !important;
+    color: #808080 !important;
+}

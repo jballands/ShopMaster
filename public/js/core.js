@@ -231,6 +231,14 @@ shopMaster.directive("popover", function ($templateCache, $compile) {
 
 shopMaster.controller("LandingCtrl", function($scope, $location, $http, UserProvider) {
     
+    $scope.verifyEmailOnEnter = function(keyCode) {
+        /*console.log($scope.submitEmailAddress);
+        // Enter pressed
+        if (keyCode == 13) {
+            $scope.verifyEmail();
+        }*
+    }
+    
     // Verify email
     $scope.verifyEmail = function() {
         
@@ -664,5 +672,49 @@ shopMaster.controller("CreateDoneCtrl", function($scope, $location) {
 shopMaster.controller("MobileCtrl", function($scope, $location, $http, UserProvider) {
     
     $scope.items = UserProvider.list;
+    $scope.tbqaItem = undefined;
+    
+    $scope.init = function() {
+        if ($scope.items == undefined) {
+            return;   
+        }
+        
+        for (var i = 0; i < $scope.items.length; i++) {
+            $scope.items[i]['disabled'] = false;
+        }        
+    };
+    $scope.init();
+    
+    $scope.disableItem = function(index) {
+        var disabled = $scope.items[index].disabled;
+        
+        // if enabled, disable and move to bottom of list
+        if (!disabled) {
+            $scope.items[index].disabled = true;
+            var item = $scope.items[index];
+            
+            // remove item from beginning of list and add to end of list
+            $scope.items.splice(index, 1);
+            $scope.items.push(item);
+        }
+        // else enable again
+        else {
+            $scope.items[index].disabled = false;
+            var item = $scope.items[index];
+            $scope.items.splice(index, 1);
+            
+            var j = 0; 
+            while (j < $scope.items.length && !$scope.items[j].disabled) {                
+                j++;
+            }
+            $scope.items.splice(j, 0, item);
+            
+        }
+    };
+    
+    $scope.quickAddItem = function() {
+        $scope.items.unshift({name: $scope.tbqaItem, category: "Quick Added Item", aisle: "?", disabled: false});
+        $scope.tbqaItem = undefined;
+    };
     
 });

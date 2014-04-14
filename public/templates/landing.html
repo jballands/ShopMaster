@@ -22,13 +22,15 @@
                        id="sm-email-text-entry" 
                        placeholder="Type your email to get started"
                        ng-model="emailAddress"
+                       ng-keyup="verifyEmailOnEnter($event.keyCode)"
                        required>
 
             </div>
 
             <button type="button" 
                     class="btn btn-info" 
-                    id="sm-lets-do-this-btn" 
+                    id="sm-lets-do-this-btn"
+                    ng-model="submitEmailAddress"
                     ng-disabled="landingForm.emailTextView.$invalid"
                     ng-click="verifyEmail()">
                     Let's Do This

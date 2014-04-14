@@ -232,11 +232,10 @@ shopMaster.directive("popover", function ($templateCache, $compile) {
 shopMaster.controller("LandingCtrl", function($scope, $location, $http, UserProvider) {
     
     $scope.verifyEmailOnEnter = function(keyCode) {
-        /*console.log($scope.submitEmailAddress);
         // Enter pressed
-        if (keyCode == 13) {
+        if (keyCode == 13 && !$scope.landingForm.emailTextView.$invalid) {
             $scope.verifyEmail();
-        }*
+        }
     }
     
     // Verify email

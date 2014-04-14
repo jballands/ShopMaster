@@ -48,16 +48,16 @@ module.exports = function(app) {
     
     });
     
-    app.get("api/listGet/:email", function(req, res) {
-    
+    app.get("/api/listGet/:email", function(req, res) {
+        
         var email = req.params.email;
-        var index = Object.keys(listDict).indexOf(email);
+        var index = Object.keys(ListDict).indexOf(email);
         
         if (index == -1) {
             res.send(200, {items: []});
         }
         else {
-            var list = listDict[email];
+            var list = ListDict[email];
             res.send(200, {items: list});
         }
     

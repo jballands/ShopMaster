@@ -12,7 +12,7 @@
     
     <div id="sm-done" class="col-xs-6">
         <button type="button" class="btn btn-success" style="margin-right:15px;">
-            Done <span class="glyphicon glyphicon-send"></span>
+            Done <span class="glyphicon glyphicon-ok"></span>
         </button>
     </div>
     
@@ -22,10 +22,10 @@
     
     <ul sortable>
         <li ng-repeat="item in items">
-            <div class="item-container-mob">
+            <div class="item-container">
                 <div class="col-xs-1">
                     <label>
-                        <input type="checkbox" name="gotItem" style="position: relative; top: 12px" />
+                        <input type="checkbox" style="position: relative; top: 12px" />
                     </label>
                 </div>
                 
@@ -41,42 +41,4 @@
         </li>
     </ul>
     
-    <div id="mobile-test-add">
-        
-        <form role="form" name="createForm" novalidate>
-            
-            <div class="col-md-5">
-                <input name="itemTextView"
-                    type="text"
-                    class="form-control"
-                    ng-model="tbaItem"
-                    id="sm-item-text-entry" 
-                    placeholder="Type a grocery item..."
-                    required>
-            </div>
-            
-            <div class="col-md-5">
-                <input name="categoryTextView"
-                    type="text"
-                    class="form-control"
-                    id="sm-category-text-entry" 
-                    ng-model="tbaCategory"
-                    placeholder="Categorize this item..."
-                    style="width:445px"
-                    typeahead="category.Name for category in categories | filter:$viewValue | limitTo:8"
-                    required>
-            </div>
-            
-            <div class="col-md-1" style="margin-left:20px;">
-                <button type="button" 
-                        class="btn btn-info"
-                        ng-disabled="createForm.$invalid"
-                        ng-click="addItem()">
-                    <span class="glyphicon glyphicon-plus"></span> Add
-                </button>
-            </div>
-            
-        </form>
-        
-    </div>
 </div>

@@ -27,7 +27,7 @@ shopMaster.config(function($routeProvider) {
     
     $routeProvider.when("/mobile", {
         templateUrl: "templates/mobile.html",
-        controller: "CreateCtrl"
+        controller: "MobileCtrl"
     }),
         
     $routeProvider.when("/create_done", {
@@ -42,8 +42,9 @@ shopMaster.config(function($routeProvider) {
  *  ---------
  */
 
-shopMaster.value("UserEmailProvider", {
-    email: ""
+shopMaster.value("UserProvider", {
+    email: "",
+    list: []
 });
 
 shopMaster.service("GucciKrogesService", function() {
@@ -184,9 +185,6 @@ shopMaster.directive("sortable", function($compile) {
             
             // jQuery UI widget
             element.sortable({
-                activate: function(event, ui) {
-                    $("#sm-item-container-0").tooltip("destroy");
-                },
                 deactivate: function(event, ui) {
                     
                     var from = angular.element(ui.item).scope().$index;
@@ -231,7 +229,7 @@ shopMaster.directive("popover", function ($templateCache, $compile) {
  * -----------
  */
 
-shopMaster.controller("LandingCtrl", function($scope, $location, $http, UserEmailProvider) {
+shopMaster.controller("LandingCtrl", function($scope, $location, $http, UserProvider) {
     
     // Verify email
     $scope.verifyEmail = function() {
@@ -239,27 +237,39 @@ shopMaster.controller("LandingCtrl", function($scope, $location, $http, UserEmai
         var emailAddress = $scope.emailAddress;
         
         // Fire AJAX request
-        $http({method: "GET",
-               url: "/api/emailVerify/" + emailAddress}).
+        $http({method: "GET", url: "/api/emailVerify/" + emailAddress}).
             
             success(function(data, status, headers, config) {
                 // Handle success
-                $("#sm-loading-landing").css({"visibility": "invisible"});
-                
                 if (data.available == true) {
                     // Route to create
-                    UserEmailProvider.email = emailAddress;
+                    UserProvider.email = emailAddress;
+                    $("#sm-loading-landing").css({"visibility": "invisible"});
                     $location.path("/create");
-                } else {
-                    $location.path("/mobile");
+                } 
+                else {
+                    // Stuff the list into the provider and go
+                    // Fire AJAX request
+                    $http({method: "GET", url: "/api/listGet/" + emailAddress}).
+            
+                        success(function(data, status, headers, config) {
+                            // Handle success
+                            UserProvider.email = emailAddress;
+                            UserProvider.list = data.items;
+                            $("#sm-loading-landing").css({"visibility": "invisible"});
+                            $location.path("/mobile");
+                    }).
+                        error(function(data, status, headers, config) {
+                            // Handle error
+                            $("#sm-loading-landing").css({"visibility": "invisible"});
+                            // TODO: Do something on error...
+                    });
                 }
-                    
             }).
             error(function(data, status, headers, config) {
                 // Handle error
                 $("#sm-loading-landing").css({"visibility": "invisible"});
-                
-                // TODO: Show that there was an error...
+                // TODO: Do something on error...
             });
         
         // Show loading animation
@@ -268,7 +278,7 @@ shopMaster.controller("LandingCtrl", function($scope, $location, $http, UserEmai
 
 });
 
-shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrogesService, UserEmailProvider) {
+shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrogesService, UserProvider) {
     
     $scope.warnRefrigerated = true;
     $scope.warnFrozen = true;
@@ -290,7 +300,7 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
     
     // Used to determine if we should show the user tooltips
     $scope.needsHelp = true;
-    $scope.needsDrag = true;
+    $scope.needsDone = true;
     $scope.needsOutputHelp = true;
     
     $scope.categories = [
@@ -520,7 +530,6 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
         // Destroy the tooltip, if possible
         $("#sm-item-text-entry").tooltip("destroy");
         $("#sm-category-text-entry").tooltip("destroy");
-        $("#sm-projected-time").tooltip("destroy");
         
         var item = $scope.tbaItem;
         var cat = $scope.tbaCategory;
@@ -548,13 +557,12 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
         }
         
         // Need to tell user to drag?
-        if ($scope.items.length > 1 && $scope.needsDrag == true) {
-            $("#sm-item-container-0").tooltip({ title: "Play around with your projected shopping time by dragging" 
-                                               + " items around.", 
+        if ($scope.items.length > 1 && $scope.needsDone == true) {
+            $(".btn-success").tooltip({ title: "When you're done, click here to save your list in the cloud.", 
                                         trigger: "manual", 
-                                        placement: "top" });
-            $("#sm-item-container-0").tooltip("show");
-            $scope.needsDrag = false;
+                                        placement: "bottom" });
+            $(".btn-success").tooltip("show");
+            $scope.needsDone = false;
         }
         
         // Show the user the wonders of the time
@@ -580,7 +588,7 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
         $scope.disableSendToPhone = true;
         
         // Fire AJAX request
-        $http.post("/api/listAdd/", {email: UserEmailProvider.email, list: $scope.items}).
+        $http.post("/api/listAdd/", {email: UserProvider.email, list: $scope.items}).
             
             success(function(data, status, headers, config) {
                 // Do something on success... 
@@ -625,6 +633,7 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
     
     $scope.onToolsClick = function() {
         $("#sm-tools-btn").tooltip("destroy");
+        $("#sm-projected-time").tooltip("destroy");
         $(".popover").tooltip({ title: "Be aware that some items need to kept cold or may crush easily." +
                                        " These tools can help you organize your list accordingly.", 
                                 trigger: "manual", 
@@ -637,6 +646,12 @@ shopMaster.controller("CreateCtrl", function($scope, $location, $http, GucciKrog
             $(".popover").tooltip("destroy");
         }
     };
+    
+    // This function only serves the purpose of destroying a poor, unsuspecting tooltips
+    $scope.destroyTooltips = function() {
+        $("#sm-projected-time").tooltip("destroy");
+        $(".btn-success").tooltip("destroy");
+    };
    
 });
 
@@ -646,6 +661,8 @@ shopMaster.controller("CreateDoneCtrl", function($scope, $location) {
     }
 });
 
-shopMaster.controller("MobileCtrl", function($scope, $location, $http) {
-    // Control something...
+shopMaster.controller("MobileCtrl", function($scope, $location, $http, UserProvider) {
+    
+    $scope.items = UserProvider.list;
+    
 });

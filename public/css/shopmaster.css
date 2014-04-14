@@ -226,6 +226,15 @@ body {
 /*
  *  MOBILE
  */
+#sm-footer {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    height: 65px;
+    width: 100%;
+    z-index: 100;
+    background-color: #163E5D;
+}
 #sm-logo-mob {
     font-size: 12pt;
     color: #86B8E0;
@@ -234,6 +243,7 @@ body {
 }
 #sm-list-mob {
     margin-top: 65px;
+    margin-bottom: 65px;
 }
 #sm-list-mob ul {
     list-style-type: none;
@@ -246,8 +256,12 @@ body {
     margin-left: 5px;
     margin-top: 5px;
     height: 3em;
-    background-color: #163E5D;
+    background-color: #86B8E0;
     display: inline-block;
     width: 100%;
     padding-left: 13px;
+    color: #163E5D;
+}
+#sm-quick-add-form {
+     margin-top: 16px;  
 }

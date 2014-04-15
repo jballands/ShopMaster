@@ -9,6 +9,11 @@ body {
     color: #B53E3E;
 }
 
+.container-fluid {
+    padding: 0;
+    margin: 0;
+}
+
 /*
  *  LANDING
  */
@@ -280,7 +285,6 @@ body {
     text-align: left;
 }
 #sm-list-mob .item-container {
-    margin-left: 5px;
     margin-top: 5px;
     height: 3em;
     background-color: #86B8E0;

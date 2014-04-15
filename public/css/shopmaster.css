@@ -230,10 +230,11 @@ body {
     position: fixed;
     left: 0;
     bottom: 0;
-    height: 65px;
+    height: 85px;
     width: 100%;
     z-index: 100;
     background-color: #163E5D;
+    text-align: center;
 }
 #sm-logo-mob {
     font-size: 12pt;
@@ -252,7 +253,6 @@ body {
     text-align: left;
 }
 #sm-list-mob .item-container {
-    cursor: move;
     margin-left: 5px;
     margin-top: 5px;
     height: 3em;
@@ -263,7 +263,7 @@ body {
     color: #163E5D;
 }
 #sm-quick-add-form {
-     margin-top: 16px;  
+     margin-top: 5px;  
 }
 .smitemdisabled {
     background-color: #C4C4C4 !important;

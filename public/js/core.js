@@ -719,20 +719,35 @@ shopMaster.controller("MobileCtrl", function($scope, $location, $http, UserProvi
             
         }
         
-        var temp = [];
+        var tempAisle = [];
+        var tempCount = [];
         for (var i = 0; i < $scope.items.length; i++) {
-            if ($scope.items[i]['disabled'] == false) {
-                temp.push($scope.items[i]);   
+            if ($scope.items[i]['disabled'] === false) {
+                tempCount.push($scope.items[i]);   
+            }
+            
+            if ($scope.items[i]['disabled'] === false && $scope.items[i]['aisle'] !== '?') {
+                tempAisle.push($scope.items[i]);   
             }
         }
 
-        $scope.projectedTime = GucciKrogesService.calculateRouteTime(temp);
-        $scope.numItems = temp.length;
+        $scope.projectedTime = GucciKrogesService.calculateRouteTime(tempAisle);
+        $scope.numItems = tempCount.length;
+        
     };
     
     $scope.quickAddItem = function() {
         $scope.items.unshift({name: $scope.tbqaItem, category: "Quick Added Item", aisle: "?", disabled: false});
         $scope.tbqaItem = undefined;
+        
+        var tempCount = [];
+        for (var i = 0; i < $scope.items.length; i++) {
+            if ($scope.items[i]['disabled'] === false) {
+                tempCount.push($scope.items[i]);   
+            }
+        }
+        
+        $scope.numItems = tempCount.length;
     };
     
     $scope.finishTrip = function() {

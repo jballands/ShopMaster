@@ -18,7 +18,8 @@
             ng-model="$parent.searchCategory"
             placeholder="Search for a category..."
             style="font-size:11pt;"
-            typeahead="category.Name for category in categories | filter:$viewValue | limitTo:8">
+            typeahead="category.Name for category in categories | filter:$viewValue | limitTo:8"
+            autocomplete="off">
     </div>
 </script>
 
@@ -132,6 +133,7 @@
                     id="sm-item-text-entry" 
                     placeholder="Type a grocery item..."
                     ng-click="destroyTooltips()"
+                    autocomplete="off"
                     required>
             </div>
             
@@ -144,6 +146,7 @@
                     placeholder="Categorize this item..."
                     style="width:445px"
                     typeahead="category.Name for category in categories | filter:$viewValue | limitTo:8"
+                    autocomplete="off"
                     required>
             </div>
             

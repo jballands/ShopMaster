@@ -47,7 +47,7 @@
 
 <div id="sm-list-mob">
 
-    <ul sortable>
+    <ul>
         <li ng-repeat="item in items">
             <div class="item-container" ng-class="{smitemdisabled: item.disabled}">
                 <div class="col-xs-1">
@@ -72,6 +72,8 @@
 
 </div>
 <div id="sm-footer">
+    {{projectedTime}}
+    {{numItems}}
     <form id="sm-quick-add-form" role="form" name="quickAddForm" novalidate>
             
             <div class="col-xs-9">

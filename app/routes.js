@@ -43,7 +43,7 @@ module.exports = function(app) {
     app.get("/api/listDrop/:email", function(req, res) {
     
         var email = req.params.email;
-        delete listDict[email];
+        delete ListDict[email];
         res.send(200);
     
     });

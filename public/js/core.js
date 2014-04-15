@@ -673,6 +673,8 @@ shopMaster.controller("MobileCtrl", function($scope, $location, $http, UserProvi
     $scope.items = UserProvider.list;
     $scope.tbqaItem = undefined;
     
+    $scope.readyToRedirect = false;
+    
     $scope.init = function() {
         if ($scope.items == undefined) {
             return;   
@@ -716,4 +718,24 @@ shopMaster.controller("MobileCtrl", function($scope, $location, $http, UserProvi
         $scope.tbqaItem = undefined;
     };
     
+    $scope.finishTrip = function() {
+        
+        // Fire AJAX request
+        $http({method: "GET", url: "/api/listDrop/" + UserProvider.email}).
+            success(function(data, status, headers, config) {
+                // Handle success. Hide the modal
+                $("#confirmModal").modal("toggle");
+                $scope.readyToRedirect = true;
+            }).
+            error(function(data, status, headers, config) {
+                // TODO: Do something on error...
+        });
+        
+        $("#confirmModal").on("hidden.bs.modal", function (e) {
+            if ($scope.readyToRedirect) {
+                $location.path("/");
+                $scope.$apply();
+            }
+        });
+    };
 });

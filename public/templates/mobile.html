@@ -1,6 +1,29 @@
 <!-- jQuery UI -->
 <script src="./js/jquery-ui-1.10.4.custom.min.js"></script>
 
+<!-- Modal -->
+<div class="modal fade" 
+     id="confirmModal" 
+     tabindex="-1" 
+     role="dialog" 
+     aria-labelledby="myModalLabel" 
+     aria-hidden="true"
+     style="color:#000000;font-size:12pt;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-body">
+                Done with your shopping trip? 
+                <br/><br/>
+                Choosing totally will delete your shopping list from the cloud.
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Not Yet</button>
+                <button type="button" class="btn btn-primary" ng-click="finishTrip()">Totally</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Content -->
 <div id="sm-navi">
 
@@ -11,7 +34,11 @@
     </div>
 
     <div id="sm-done" class="col-xs-6">
-        <button type="button" class="btn btn-success" style="margin-right:15px;">
+        <button type="button" 
+                class="btn btn-success" 
+                style="margin-right:15px;"
+                data-toggle="modal" 
+                data-target="#confirmModal">
             Done <span class="glyphicon glyphicon-ok"></span>
         </button>
     </div>

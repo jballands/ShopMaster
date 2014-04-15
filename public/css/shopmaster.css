@@ -47,6 +47,33 @@ body {
     visibility: hidden;
 }
 
+@media only screen and (min-width : 320px) and (max-width : 480px) {
+    #sm-title-slide {
+        margin-top: 100px;
+    }
+    #sm-title {
+        font-size: 55pt;
+    }
+    #sm-slogan {
+        font-size: 10.5pt;
+        margin-left: 100px;
+    }
+    #sm-credit {
+        width: 85%;
+        font-size: 10.5pt;
+        margin: 0 auto;
+    }
+    #sm-login-slide {
+        width: 85%;
+    }
+    #sm-lets-do-this-btn, #sm-email-text-entry {
+        font-size: 11pt;
+    }
+    #sm-loading-landing {
+
+    }
+}
+
 /*
  *  CREATE
  */

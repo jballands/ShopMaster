@@ -3,6 +3,7 @@ body {
     font-size: 16pt;
     background-color: #1671B8;
     color: #FFFFFF;
+    width: 100%;
 }
 
 .has-error input {
@@ -52,7 +53,7 @@ body {
     visibility: hidden;
 }
 
-@media only screen and (min-width : 320px) and (max-width : 480px) {
+@media only screen and (min-width : 320px) and (max-width : 568px) {
     #sm-title-slide {
         margin-top: 100px;
     }

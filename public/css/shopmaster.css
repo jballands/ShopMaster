@@ -3,7 +3,6 @@ body {
     font-size: 16pt;
     background-color: #1671B8;
     color: #FFFFFF;
-    width: 100%;
 }
 
 .has-error input {
@@ -74,9 +73,6 @@ body {
     }
     #sm-lets-do-this-btn, #sm-email-text-entry {
         font-size: 11pt;
-    }
-    #sm-loading-landing {
-
     }
 }
 
